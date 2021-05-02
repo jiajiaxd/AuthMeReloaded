@@ -299,21 +299,6 @@ public class AsynchronousLogin implements AsynchronousProcess {
         }
 
         String message = ChatColor.GRAY + String.join(", ", formattedNames) + ".";
-
-        logger.fine("The user " + player.getName() + " has " + auths.size() + " accounts:");
-        logger.fine(message);
-
-        for (Player onlinePlayer : bukkitService.getOnlinePlayers()) {
-            if (onlinePlayer.getName().equalsIgnoreCase(player.getName())
-                && service.hasPermission(onlinePlayer, PlayerPermission.SEE_OWN_ACCOUNTS)) {
-                service.send(onlinePlayer, MessageKey.ACCOUNTS_OWNED_SELF, Integer.toString(auths.size()));
-                onlinePlayer.sendMessage(message);
-            } else if (service.hasPermission(onlinePlayer, AdminPermission.SEE_OTHER_ACCOUNTS)) {
-                service.send(onlinePlayer, MessageKey.ACCOUNTS_OWNED_OTHER,
-                    player.getName(), Integer.toString(auths.size()));
-                onlinePlayer.sendMessage(message);
-            }
-        }
     }
 
     /**
